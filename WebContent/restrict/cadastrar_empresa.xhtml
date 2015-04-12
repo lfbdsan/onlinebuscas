@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui" template="./../resources/main.xhtml">
+
+	<ui:define name="tarefas">
+		<p:dialog header="Cadastrar Empresa" id="dialog" modal="false"
+			minWidth="965" width="965" closable="true" position="center"
+			widgetVar="modalLogin" draggable="true" resizable="false"
+			visible="true" maximizable="false"
+			footer="Teclas [F2-Salvar] [F12 Cancelar]">
+
+
+			<form id="form">
+				<p:growl id="msg0" />
+				<h:inputHidden id="idEmpresa" value="#{mbEmpresa.empresa.idEmpresa}" />
+				
+				<h:panelGrid columns="4" cellpadding="5">
+					<h:outputLabel for="razao" value="Razão Social:" />
+					<p:inputText id="razao" required="true"
+						requiredMessage="O Campo [Razão Social] é obrigatório" size="40"
+						value="#{mbEmpresa.empresa.razaosocial}"
+						onkeyup="this.value = this.value.toUpperCase()" />
+
+					<h:outputLabel for="fantasia" value="Fantasia:" />
+					<p:inputText id="fantasia" required="true"
+						requiredMessage="O Campo [Fantasia] é obrigatório" size="20"
+						value="#{mbEmpresa.empresa.fantasia}"
+						onkeyup="this.value = this.value.toUpperCase()" />
+
+					<h:outputLabel for="cnpj" value="CNPJ:" />
+					<p:inputMask id="cnpj" value="#{mbEmpresa.empresa.cnpj}" size="19"
+						maxlength="20" mask="99.999.999/9999-99" required="true" converterId="converter.CnpjConverter"
+						requiredMessage="O Campo [CNPJ] é obrigatório" />
+						
+
+					<h:outputLabel for="ie" value="IE:" />
+					<p:inputMask id="ie" mask="999.999.999"
+						value="#{mbEmpresa.empresa.ie}" required="true"
+						requiredMessage="O Campo [IE] é obrigatório" />
+
+					<h:outputLabel for="telefone" value="Telefone:" />
+					<p:inputMask id="telefone" value="#{mbEmpresa.empresa.telefone}"
+						mask="(99)9999-9999" />
+
+					<h:outputLabel for="fax" value="Fax:" />
+					<p:inputMask id="fax" value="#{mbEmpresa.empresa.fax}"
+						mask="(99)9999-9999" />
+
+					<h:outputLabel for="endereco" value="Endereço:" />
+					<p:inputText id="endereco" required="true"
+						requiredMessage="o Campo [Endereço] é obrigatório" size="43"
+						onkeyup="this.value = this.value.toUpperCase()"
+						value="#{mbEmpresa.empresa.endereco}" />
+
+					<h:outputLabel for="numero" value="Número:" />
+					<p:inputText id="numero" required="false" size="5"
+						value="#{mbEmpresa.empresa.numero}" />
+
+					<h:outputLabel for="bairro" value="Bairro:" />
+					<p:inputText id="bairro" size="20" required="true"
+						value="#{mbEmpresa.empresa.bairro}"
+						requiredMessage="o Campo [Bairro] é obrigatório"
+						onkeyup="this.value = this.value.toUpperCase()" />
+
+					<h:outputLabel for="cidade" value="Cidade:" />
+					<p:inputText id="cidade" required="false" size="25"
+						onkeyup="this.value = this.value.toUpperCase()"
+						value="#{mbEmpresa.empresa.cidade}" />
+
+
+					<h:outputLabel for="cep" value="Cep:" />
+					<p:inputMask id="cep" mask="99.999-999"
+						value="#{mbEmpresa.empresa.cep}" />
+
+					<h:outputLabel for="contato" value="Contato:" />
+					<p:inputText id="contato" required="false" size="20"
+						onkeyup="this.value = this.value.toUpperCase()"
+						value="#{mbEmpresa.empresa.contato}" />
+
+					<h:outputLabel for="celular" value="Celular:" />
+					<p:inputMask id="celular" required="false" size="20"
+						value="#{mbEmpresa.empresa.celular}" mask="(99)9999-9999" />
+
+					<h:outputLabel for="ativo" value="Status" />
+					<p:selectOneMenu id="ativo" value="#{mbEmpresa.empresa.ativo}">
+						<f:selectItem itemValue="1" itemLabel="ATIVO" />
+						<f:selectItem itemValue="2" itemLabel="INATIVO" />
+					</p:selectOneMenu>
+
+					<h:outputLabel for="plano" value="Plano.:" />
+                    <p:selectOneMenu id="plano" value="#{mbEmpresa.empresa.plano}">
+                         <f:selectItems value="#{bbPlano.planos}" var="plano"
+                                        itemValue="#{plano.idPlano}"  
+                                        itemLabel="#{plano.nomePlano}"/>
+                    </p:selectOneMenu>
+
+				</h:panelGrid>
+				<h:panelGrid columns="2" cellpadding="10">
+				<h:form>
+					<p:commandButton value="Gravar" action="#{mbEmpresa.addEmpresa}"
+						ajax="false" partialSubmit="true" />
+				</h:form>
+
+				</h:panelGrid>
+
+			</form>
+		</p:dialog>
+	</ui:define>
+
+
+
+</ui:composition>

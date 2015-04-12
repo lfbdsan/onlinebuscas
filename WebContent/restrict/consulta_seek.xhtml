@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui"
+
+                template="./../resources/main.xhtml">
+
+    <ui:define name="tarefas">
+             <p:dialog header="Consulta SEEK"
+                  id="dialog"  
+                  modal="false"
+                  minWidth="665"
+                  width="665"
+                  closable="true"
+                  position="center"
+                  widgetVar="modalLogin"
+                  draggable="true"
+                  resizable="false"
+                  visible="true"
+                  maximizable="false"
+                  footer="Teclas [F2-Salvar] [F12 Cancelar]">
+
+
+            <form id="cadastroEmpresa">
+                <p:growl id="growl"/>
+                <h:panelGrid columns="4" cellpadding="5">
+                    <h:outputLabel for="cpf" value="Consulta CPF:" />
+                    <p:inputText id="razao" required="true" requiredMessage="O Campo [CPF:] é obrigatório" size="40"
+                                 value="#{mbEmpresa.empresa.razaosocial}"
+                                 onkeyup="this.value = this.value.toUpperCase()"/>
+     
+                     </h:panelGrid>
+                <h:panelGrid columns="2" cellpadding="10">
+                    <p:commandButton value="Consultar" action="#{mbEmpresa.addEmpresa}" 
+                     update=":growl"/>
+                     
+   
+                </h:panelGrid>
+                
+                <p:separator/>
+                Os dados contidos nessa consulta são atualizados conforme......
+
+            </form>
+        </p:dialog>  
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="./../resources/main.xhtml">
+
+    <ui:define name="tarefas">
+
+        <p:growl id="msg" rendered="#{param.erro}">#{msgs.erro_message}</p:growl>
+
+        <p:dialog header="Consultar Empresas"
+                  id="dialog"  
+                  modal="false"
+                  minWidth="1065"
+                  width="1065"
+                  closable="true"
+                  position="center"
+                  widgetVar="modalLogin"
+                  draggable="true"
+                  resizable="false"
+                  visible="true"
+                  footer="Teclas [F2-Salvar] [F12 Cancelar]">
+
+            <br/>
+            <p:separator/>
+            <h:form id="formtable">
+                <p:growl id="msg0"/>
+
+                <p:dataTable id="idTabela" var="empresa" value="#{mbEmpresa.empresas}"
+                             paginator="true" rows="6" emptyMessage="Nenhum registro encontrado"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
+                             {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15"
+                             style="width: 100%; alignment-adjust: middle" >
+
+                    <f:facet name="header">Lista de Empresas</f:facet>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Razão Social"/>
+                        </f:facet>
+                        <h:outputText value="#{empresa.razaosocial}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="CNPJ"/>
+                        </f:facet>
+                        <h:outputText value="#{empresa.cnpj}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="IE"/>
+                        </f:facet>
+                        <h:outputText value="#{empresa.ie}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Cidade"/>
+                        </f:facet>
+                        <h:outputText value="#{empresa.cidade}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Ações"/>
+                        </f:facet>
+                        <p:commandButton value="Editar" image="ui-icon-pencil"
+                                         process="@this">
+                            <f:setPropertyActionListener target="#{mbPlano.editPlano}"
+                                                         value="#{plano}"/>
+                        </p:commandButton>
+                        <p:commandButton value="Remover" action="#{mbPlano.deletePlano}"
+                                         image="ui-icon-close" update=":formtable">
+                            <f:setPropertyActionListener target="#{mbPlano.plano}"
+                                                         value="#{plano}"/>
+                        </p:commandButton>
+                    </p:column>
+
+                </p:dataTable>
+
+                <h:form id="impressao">
+                    
+                    <a href="../ExecutaRelatorioCadastroEmpresa" target="blank">
+                        <img src = "../resources/css/imagens/icone_pdf.png" height="64" width="64"></img></a>
+                                                                   
+                        </h:form>
+                        <h:messages /> 
+                
+            </h:form>
+        </p:dialog>  
+    </ui:define>
+
+</ui:composition>
+

@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui" template="./../resources/main.xhtml">
+
+
+	<ui:define name="tarefas">
+	
+	 <p:growl id="msg"></p:growl>
+
+		<p:dialog header="Cadastrar Planos" id="dialog" modal="false"
+			minWidth="565" width="565" closable="true" maximizable="false"
+			position="center" widgetVar="modalLogin" draggable="true"
+			resizable="false" visible="true" dynamic="true"
+			footer="Teclas [F2-Salvar] [F12 Cancelar]">
+
+			<form id="form">
+				
+				
+				<h:inputHidden id="idplano" value="#{mbPlano.plano.idPlano}" />
+				<h:panelGrid columns="2" cellpadding="6">
+
+					<h:outputLabel for="plano" value="Plano:" />
+					<p:inputText id="plano" required="true"
+						value="#{mbPlano.plano.nomePlano}"
+						requiredMessage="O campo [Plano] é obrigatório" size="30"
+						onkeyup="this.value = this.value.toUpperCase()" />
+
+					<h:outputLabel for="diavencimento" value="Dia Vencimento:" />
+					<p:inputText id="diavencimento" required="true" value="#{mbPlano.plano.diaVencimento}"
+						requiredMessage="O campo [Dia vencimento] é obrigatório" size="10" />
+
+					<h:outputLabel for="fatura" value="Fatura automática?" />
+					<p:selectOneMenu id="fatura" value="#{mbPlano.plano.faturaAuto}">
+						<f:selectItem itemValue="1" itemLabel="Sim" />
+						<f:selectItem itemValue="2" itemLabel="Não" />
+					</p:selectOneMenu>
+					
+					<h:outputLabel for="boleto" value="Gera Boleto?" />
+					<p:selectOneMenu id="boleto" value="#{mbPlano.plano.geraBoleto}">
+						<f:selectItem itemValue="1" itemLabel="Sim" />
+						<f:selectItem itemValue="2" itemLabel="Não" />
+					</p:selectOneMenu>
+					
+					<h:outputLabel for="notafiscal" value="Nota Fiscal?" />
+					<p:selectOneMenu id="notafiscal" value="#{mbPlano.plano.notaFiscal}">
+						<f:selectItem itemValue="1" itemLabel="Sim" />
+						<f:selectItem itemValue="2" itemLabel="Não" />
+					</p:selectOneMenu>
+
+<h:form>
+					<p:commandButton value="Gravar" action="#{mbPlano.addPlano}"
+					partialSubmit="true" ajax="false"/>
+		</h:form>			
+
+				</h:panelGrid>
+
+			</form>
+		</p:dialog>
+	</ui:define>
+
+</ui:composition>

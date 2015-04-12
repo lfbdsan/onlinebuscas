@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui"
+
+                template="./../resources/main.xhtml">
+
+    <ui:define name="tarefas">
+
+
+        <p:growl id="msg"></p:growl>
+       
+                <p:dialog header="Cadastro Usuários"
+                  id="dialog"  
+                  modal="false"
+                  minWidth="865"
+                  width="865"
+                  closable="true"
+                  position="center"
+                  widgetVar="modalLogin"
+                  draggable="true"
+                  resizable="false"
+                  visible="true"
+                  footer="Teclas [F2-Salvar] [F12 Cancelar]">
+
+
+            <form id="form">
+                <p:growl id="msg0"/>
+                <h:inputHidden id="idusuario" value="#{mbUsuario.usuario.idUsuario}" />
+                
+                <h:panelGrid columns="4" cellpadding="5">
+                    <h:outputLabel for="nome" value="Nome.:"/>
+                    <p:inputText id="nome" required="true" requiredMessage="o Campo [Nome] é obrigatório" size="50"
+                                 value="#{mbUsuario.usuario.nome}" onkeyup="this.value = this.value.toUpperCase()"/>
+                                 
+				<h:outputLabel for="empresa" value="Empresa.:" />
+                    <p:selectOneMenu id="empresa" value="#{mbUsuario.usuario.empresa}">
+                         <f:selectItems value="#{bbEmpresa.empresas}" var="empresa"
+                                        itemValue="#{empresa.idEmpresa}"  
+                                        itemLabel="#{empresa.razaosocial}"/>
+                    </p:selectOneMenu>                                 
+
+                </h:panelGrid>
+                <p:separator/>
+                <h:panelGrid columns="2">
+
+                    <h:outputLabel for="login" value="Login.:"/>
+                    <p:inputText id="login" value="#{mbUsuario.usuario.login}" size="30"/>
+                    
+                    <h:outputLabel for="senha" value="Senha.:" />
+                    <p:password id="senha" size="20" maxlength="22" promptLabel="Digite sua Senha" value="#{mbUsuario.confereSenha}"
+                                weakLabel="Senha Fraca" goodLabel="Senha Boa" strongLabel="Senha Forte" feedback="true"/> 
+
+                    <h:outputLabel for="senhaconf2" value="Confirmar Senha.:"/>
+                    <p:password id="senhaconf2" size="20" value="#{mbUsuario.usuario.senha}" maxlength="22"   
+                                promptLabel="Confirme sua Senha" weakLabel="Senha Fraca" 
+                                goodLabel="Senha Boa" strongLabel="Senha Forte" feedback="true">
+                    </p:password> 
+
+                </h:panelGrid>
+
+
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:form>
+                        <p:commandButton value="Gravar" action="#{mbUsuario.addUsuario}"
+                        ajax="false" partialSubmit="true"/>
+                   
+                    </h:form>
+                </h:panelGrid>
+
+            </form>
+        </p:dialog>  
+    </ui:define>
+
+</ui:composition>

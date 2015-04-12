@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:sec="http://www.springframework.org/security/facelets/tags">
+
+    <h:head>
+        <title>Online Buscas!</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/default.css"
+         rel="stylesheet" type="text/css" />
+        
+    </h:head>
+
+    <h:body>
+
+        <div id="topo">
+
+
+            <div id="logoff">
+
+            </div>
+        </div>  
+
+        <div id="menu"><!-- Menu ########################################## Menu-->
+            <h:form>    
+                <p:menubar styleClass="labelmenu" style="">
+                    
+                    
+                    <p:menuitem  value="Principal" title="HOME" icon="ui-icon-home" url="/resources/main.jsf"></p:menuitem>
+                    
+                    <sec:ifAnyGranted roles="ROLE_ADMIN">
+                    <p:submenu label="Cadastros" icon="ui-icon-folder-open"> 
+                        <p:menuitem value="Planos" url="/restrict/cadastrar_plano.jsf" icon="ui-icon-folder-open"/>  
+                        <p:menuitem value="Empresas" url="/restrict/cadastrar_empresa.jsf" icon="ui-icon-folder-open"/>                        
+                        <p:menuitem value="Usuários" url="/restrict/cadastrar_usuario.jsf" icon="ui-icon-folder-open"/>                        
+                    </p:submenu> 
+                        </sec:ifAnyGranted>
+                    
+                    <sec:ifAnyGranted roles="ROLE_ADMIN">
+                     <p:submenu label="Consultas Cadastros" icon="ui-icon-search">
+                    <p:menuitem value="Planos" url="/restrict/consultar_planos.jsf"/>  
+                        <p:menuitem value="Empresas" url="/restrict/consultar_empresas.jsf"/> 
+                        <p:menuitem value="Usuarios" url="/restrict/consultar_usuarios.jsf"/>
+                    </p:submenu>
+                        </sec:ifAnyGranted>
+                   
+                    
+                    <sec:ifAnyGranted roles="ROLE_USER, ROLE_ADMIN">
+                    <p:submenu label="Sistema" icon="ui-icon-wrench">  
+                        
+                        <p:menuitem value="Consulta Seek" url="/restrict/consulta_seek.jsf"/>  
+                        
+                    </p:submenu> 
+                    </sec:ifAnyGranted>
+                        
+                    <sec:ifAnyGranted roles="ROLE_ADMIN">
+                    <p:submenu label="Financeiro" icon="ui-icon-note">  
+                        <p:menuitem value="Relatórios" url="/restrict/consultarpessoas.faces" />  
+                    </p:submenu> 
+                        </sec:ifAnyGranted>
+                    
+                    <sec:ifAnyGranted roles="ROLE_ADMIN">
+                    <p:submenu label="Relatórios" icon="ui-icon-document">  
+                        <p:menuitem value="Rel.Cadastro de Planos" url="/restrict/consultarpessoas.faces"/>  
+                        <p:menuitem value="Rel.Cadastro de Empresas" url="/restrict/consultarpessoas.faces"/>  
+                        <p:menuitem value="Rel.Cadastro de Usuários" url="/restrict/consultarpessoas.faces"/>  
+                    </p:submenu> 
+                        </sec:ifAnyGranted>
+                    
+                    <sec:ifAnyGranted roles="ROLE_ADMIN">
+                    <p:submenu label="Administrativo" icon="ui-icon-wrench">  
+                        <p:menuitem value="adminisrativo" url="/restrict/consultarpessoas.faces"/>  
+                    </p:submenu> 
+                        </sec:ifAnyGranted>
+                    
+                     <sec:ifAnyGranted roles="ROLE_ADMIN">
+                    <p:submenu label="Configurações" icon="ui-icon-gear">  
+                        <p:menuitem value="adminisrativo" url="/restrict/consultarpessoas.faces"/> 
+                         <p:menuitem value="Libera Licença" url="/restrict/libera_licenca.jsf"/>
+                    </p:submenu> 
+                    </sec:ifAnyGranted>
+                    
+                    <p:submenu label="Logout" icon="ui-icon-closethick">  
+                        <p:menuitem value="SAIR" url="/j_spring_security_logout"/>  
+                    </p:submenu>
+                    
+                </p:menubar> 
+            </h:form>           
+        </div>
+
+        <!-- Menu ########################################## Menu -->
+
+        <div id="tarefas">
+            <ui:insert name="tarefas"></ui:insert>
+        </div>
+
+       <div class="rodape">
+       
+        
+       </div> <!--Fim da div rodape -->
+
+    </h:body>
+
+</html>
