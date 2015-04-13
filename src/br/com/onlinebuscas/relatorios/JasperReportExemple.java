@@ -36,7 +36,7 @@ public class JasperReportExemple
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/onlinebuscas", "root", "");
     Statement stm = con.createStatement();
-    String query = "select * from empresa";
+    String query = "select * from plano";
     ResultSet rs = stm.executeQuery(query);
     
 
@@ -56,7 +56,7 @@ public class JasperReportExemple
   {
     try
     {
-      new JasperReportExemple().gerar("C:\\Users\\luis\\workspace_java\\onlinebuscas\\WebContent\\WEB-INF\\relatorios\\rel_cadastros_empresas.jrxml");
+      new JasperReportExemple().gerar("C:\\Users\\luis\\workspace_java\\onlinebuscas\\WebContent\\WEB-INF\\relatorios\\rel_cadastros_planos.jrxml");
     }
     catch (Exception e)
     {

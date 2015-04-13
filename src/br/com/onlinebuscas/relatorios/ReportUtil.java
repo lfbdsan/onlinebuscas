@@ -25,7 +25,7 @@ import org.primefaces.model.StreamedContent;
 
 public class ReportUtil
 {
-  public static final String TEMPLATE = "C:\\Users\\luis\\workspace_java\\onlinebuscas\\WebContent\\WEB-INF\\relatorios\\rel_cadastros_empresas.jrxml";
+  public static final String TEMPLATE = "C:\\Users\\luis\\workspace_java\\onlinebuscas\\WebContent\\WEB-INF\\relatorios\\rel_cadastros_plano.jrxml";
   
   public StreamedContent geraRelatorio(HashMap parametrosRelatorio)
     throws Exception
@@ -34,7 +34,7 @@ public class ReportUtil
     try
     {
       Connection conexao = getConexao();
-      InputStream reportStream = getClass().getResourceAsStream("/WEB-INF/relatorios/rel_cadastros_empresas.jrxml");
+      InputStream reportStream = getClass().getResourceAsStream("C:\\Users\\luis\\workspace_java\\onlinebuscas\\WebContent\\WEB-INF\\relatorios\\rel_cadastros_plano.jrxml");
       JasperDesign jd = JRXmlLoader.load(reportStream);
       JasperReport jr = JasperCompileManager.compileReport(jd);
       JasperPrint jp = JasperFillManager.fillReport(jr, parametrosRelatorio, conexao);
